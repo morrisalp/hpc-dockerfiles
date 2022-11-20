@@ -5,7 +5,7 @@ WORKDIR /root
 RUN pip install --upgrade pip \
     && pip install jupyterlab \
     && apt-get update \
-    && apt-get install -y tmux git tree rsync openssh-server
+    && apt-get install -y tmux git tree rsync openssh-server python3-distutils python3-apt
 
 # setup for SSH server:
 RUN mkdir /var/run/sshd
