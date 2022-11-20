@@ -1,0 +1,5 @@
+FROM morrisalp/base
+
+EXPOSE 8888
+
+ENTRYPOINT ["jupyter-lab", "--config=.jupyter/nbconfig/tree.json", "--allow-root"]

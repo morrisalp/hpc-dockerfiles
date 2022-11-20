@@ -1,0 +1,6 @@
+FROM morrisalp/base
+
+EXPOSE 22
+
+ENTRYPOINT ["/usr/sbin/sshd", "-D"]
+
