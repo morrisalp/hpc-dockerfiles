@@ -1,6 +1,6 @@
 # HPC Dockerfiles
 
-You can use these to create environments for jobs on HPC (Runai).
+You can use these to create environments for jobs on HPC (Runai). Images come with Python, Pytorch, CUDA drivers, and a few useful utilities (tree, tmux, git).
 
 ## Requirements
 
