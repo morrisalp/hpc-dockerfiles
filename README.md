@@ -31,7 +31,7 @@ Once you build an image, push it to Docker Hub with `docker push imagename`.
 
 You can enter it with `runai bash myjobname` and run persistent scripts in `tmux`.
 
-## Running job on Runai (JL)
+## Running job on Runai (JL / SSH)
 
 Run one of:
 
