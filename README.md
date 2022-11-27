@@ -33,6 +33,8 @@ You can enter it with `runai bash myjobname` and run persistent scripts in `tmux
 
 ## Running job on Runai (JL)
 
+### Basic usage
+
 * `runai submit --pvc=storage:/storage -i  morrisalp/jl --name myjobname  --interactive --service-type=portforward --port 8888:8888`
 
 Make sure to leave this running (recommended in `tmux`) so that port forwarding persists. If you are on some university server `uid@serverip`, you must also set up port forwarding locally with:
@@ -41,13 +43,23 @@ Make sure to leave this running (recommended in `tmux`) so that port forwarding 
 
 Now you can access the service locally at `localhost:8888`. Enter this into your browser, and use the token from `runai logs myjobname`. 
 
+In all of the above, replace `8888` with another local port if needed.
+
+### JL with persistent storage (files, environments)
+
 If you would like JupyterLab to use a subdirectory of your storage directory as the working directory, add the `--working-dir` flag as shown:
 
 * `runai submit --pvc=storage:/storage -i  morrisalp/jl --name myjobname  --interactive --service-type=portforward --port 8888:8888 --working-dir /storage/yourname/notebooks`
 
 (Replace `yourname` with your name and create the corresponding directory.)
 
-In all of the above, replace `8888` with another local port if needed.
+The default kernel does not persist between jobs. To add kernels to Jupyter for existing virtual environments (venv/conda), add the `KERNEL_ENVS_DIR` environment variable flag as shown:
+
+* `runai submit --pvc=storage:/storage -i  morrisalp/jl --name myjobname  --interactive --service-type=portforward --port 8888:8888 --working-dir /storage/yourname/notebooks -e KERNEL_ENVS_DIR=/storage/yourname/notebooks/envs`
+
+Replace `/storage/yourname/notebooks/envs` with the directory in which your environments are saved. Note that each environment must have `ipykernel` installed (`pip install ipykernel`). In your code, you can see which environment is being used with `import sys; sys.executable`.
+
+**Note**: To install libraries in these kernels when working in a notebook, use `pip install` *without* an exclamation point (*not* `! pip install`).
 
 ## Running job on Runai (SSH / PyCharm)
 
