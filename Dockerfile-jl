@@ -1,5 +1,10 @@
 FROM morrisalp/base
 
+ADD setup_envs.sh /root
+
+RUN chmod a+x /root/setup_envs.sh
+
 EXPOSE 8888
 
-ENTRYPOINT ["jupyter-lab", "--config=.jupyter/nbconfig/tree.json", "--allow-root"]
+ENTRYPOINT ["./root/setup_envs.sh", "$KERNEL_ENVS_DIR", "&&", "jupyter-lab", "--config=.jupyter/nbconfig/tree.json", "--allow-root"]
+# submit with environment variable KERNEL_ENVS_DIR set to add environments from directory as kernels
