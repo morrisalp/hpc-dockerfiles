@@ -45,3 +45,11 @@ If you use one of the latter with port forwarding, make sure to submit this in `
 * `ssh uid@serverip -NL 8888:localhost:8888`
 
 Now you can access the service (JL/ssh) locally at `localhost:8888`. For Jupyterlab, enter this into your browser, and use the token from `runai logs myjobname`. For ssh (Pycharm), create a new remote interpreter for your project with settings: `localhost:8888`, username=password=`root`.
+
+In all of the above, replace `8888` with another local port if needed.
+
+If you would like JupyterLab to use a subdirectory of your storage directory as the working directory, add the `--working-dir` flag as shown:
+
+* `runai submit --pvc=storage:/storage -i  morrisalp/jl --name myjobname  --interactive --service-type=portforward --port 8888:8888 --working-dir /storage/yourname/notebooks`
+
+(Replace `yourname` with your name and create the corresponding directory.)
