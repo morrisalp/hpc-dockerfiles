@@ -31,25 +31,32 @@ Once you build an image, push it to Docker Hub with `docker push imagename`.
 
 You can enter it with `runai bash myjobname` and run persistent scripts in `tmux`.
 
-## Running job on Runai (JL / SSH)
-
-Run one of:
+## Running job on Runai (JL)
 
 * `runai submit --pvc=storage:/storage -i  morrisalp/jl --name myjobname  --interactive --service-type=portforward --port 8888:8888`
-* `runai submit --pvc=storage:/storage -i  morrisalp/ssh --name myjobname  --interactive --service-type=portforward --port 8888:22`
 
-(Replace `morrisalp/imagename` with your own Docker Hub image if you built it from scratch.)
-
-If you use one of the latter with port forwarding, make sure to submit this in `tmux` and leave it running. If you are on some university server `uid@serverip`, you must also set up port forwarding locally with:
+Make sure to leave this running (recommended in `tmux`) so that port forwarding persists. If you are on some university server `uid@serverip`, you must also set up port forwarding locally with:
 
 * `ssh uid@serverip -NL 8888:localhost:8888`
 
-Now you can access the service (JL/ssh) locally at `localhost:8888`. For Jupyterlab, enter this into your browser, and use the token from `runai logs myjobname`. For ssh (Pycharm), create a new remote interpreter for your project with settings: `localhost:8888`, username=password=`root`.
-
-In all of the above, replace `8888` with another local port if needed.
+Now you can access the service locally at `localhost:8888`. Enter this into your browser, and use the token from `runai logs myjobname`. 
 
 If you would like JupyterLab to use a subdirectory of your storage directory as the working directory, add the `--working-dir` flag as shown:
 
 * `runai submit --pvc=storage:/storage -i  morrisalp/jl --name myjobname  --interactive --service-type=portforward --port 8888:8888 --working-dir /storage/yourname/notebooks`
 
 (Replace `yourname` with your name and create the corresponding directory.)
+
+In all of the above, replace `8888` with another local port if needed.
+
+## Running job on Runai (SSH / PyCharm)
+
+* `runai submit --pvc=storage:/storage -i  morrisalp/ssh --name myjobname  --interactive --service-type=portforward --port 8888:22`
+
+Make sure to leave this running (recommended in `tmux`) so that port forwarding persists. If you are on some university server `uid@serverip`, you must also set up port forwarding locally with:
+
+* `ssh uid@serverip -NL 8888:localhost:8888`
+
+Now you can access the service locally at `localhost:8888`. Create a new remote interpreter for your project with settings: `localhost:8888`, username=password=`root`.
+
+In all of the above, replace `8888` with another local port if needed.
