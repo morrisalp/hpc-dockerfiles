@@ -8,9 +8,9 @@ RUN pip install --upgrade pip \
     && apt-get install -y tmux git tree rsync openssh-server python3-distutils python3-apt
 
 # setup for SSH server:
-RUN mkdir /var/run/sshd
-RUN echo 'root:root' | chpasswd
-RUN sed 's/#*PermitRootLogin prohibit-password/PermitRootLogin yes/' -i /etc/ssh/sshd_config
-RUN sed 's/session\s*required\s*pam_loginuid.so/session optional pam_loginuid.so/' -i /etc/pam.d/sshd
+RUN mkdir /var/run/sshd \
+    && echo 'root:root' | chpasswd \
+    && sed 's/#*PermitRootLogin prohibit-password/PermitRootLogin yes/' -i /etc/ssh/sshd_config \
+    && sed 's/session\s*required\s*pam_loginuid.so/session optional pam_loginuid.so/' -i /etc/pam.d/sshd
 
 ENTRYPOINT sleep infinity
