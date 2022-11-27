@@ -61,6 +61,10 @@ Replace `/storage/yourname/notebooks/envs` with the directory in which your envi
 
 **Note**: To install libraries in these kernels when working in a notebook, use `pip install` *without* an exclamation point (*not* `! pip install`).
 
+**Recommended on first run**: To clone the base environment (contains CUDA-compatible torch and other scientific packages) into a new conda environment within `KERNEL_ENVS_DIR`, set the additional flag `CLONE_BASE_TO` as shown below: 
+
+* `runai submit --pvc=storage:/storage -i  morrisalp/jl --name myjobname  --interactive --service-type=portforward --port 8888:8888 --working-dir /storage/yourname/notebooks -e KERNEL_ENVS_DIR=/storage/yourname/notebooks/envs -e CLONE_BASE_TO=cloned_env`
+
 ## Running job on Runai (SSH / PyCharm)
 
 * `runai submit --pvc=storage:/storage -i  morrisalp/ssh --name myjobname  --interactive --service-type=portforward --port 8888:22`

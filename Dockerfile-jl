@@ -6,6 +6,7 @@ RUN chmod a+x /root/launch_jl.sh
 
 EXPOSE 8888
 
-ENTRYPOINT /root/launch_jl.sh "$KERNEL_ENVS_DIR"
+ENTRYPOINT /root/launch_jl.sh
 # submit with environment variable KERNEL_ENVS_DIR set to add environments from directory as kernels
-# (using shell form rather than exec form so that variable expands)
+# submit with environment variable CLONE_BASE_TO to clone base conda env into given environment name
+#   inside KERNEL_ENVS_DIR (does nothing if KERNEL_ENVS_DIR is not set)

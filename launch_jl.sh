@@ -1,10 +1,18 @@
 #!/bin/bash
 
-if [ -n "$1" ]
+if [ -n "$KERNEL_ENVS_DIR" ]
 then
-    echo "Adding kernels for environments in: $1"
+
+    if [-n "$CLONE_BASE_TO" ]
+    then
+        echo "Cloning base conda environment into: $CLONE_BASE_TO (within $KERNEL_ENVS_DIR)"
+        conda create --prefix "$KERNEL_ENVS_DIR/$CLONE_BASE_TO" --clone base
+        echo "Done cloning"
+    fi
+
+    echo "Adding kernels for environments in: $KERNEL_ENVS_DIR"
     shopt -s nullglob
-    for p in $1/*/bin/python
+    for p in "$KERNEL_ENVS_DIR/*/bin/python"
     do
         name=$(basename $(dirname $(dirname $p)))
         echo "  Adding kernel: $p ($name)"
