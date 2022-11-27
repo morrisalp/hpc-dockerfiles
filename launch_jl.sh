@@ -7,6 +7,7 @@ then
     then
         echo "Cloning base conda environment into: $CLONE_BASE_TO (within $KERNEL_ENVS_DIR)"
         conda create --prefix "$KERNEL_ENVS_DIR/$CLONE_BASE_TO" --clone base
+        conda config --append envs_dirs "$KERNEL_ENVS_DIR" # so it will show up with conda env list
         echo "Done cloning"
     fi
 
