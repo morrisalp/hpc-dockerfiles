@@ -12,7 +12,7 @@ then
 
     echo "Adding kernels for environments in: $KERNEL_ENVS_DIR"
     shopt -s nullglob
-    for p in "$KERNEL_ENVS_DIR/*/bin/python"
+    for p in "$KERNEL_ENVS_DIR"/*/bin/python
     do
         name=$(basename $(dirname $(dirname $p)))
         echo "  Adding kernel: $p ($name)"
