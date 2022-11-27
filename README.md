@@ -42,6 +42,6 @@ Run one of:
 
 If you use one of the latter with port forwarding, make sure to submit this in `tmux` and leave it running. If you are on some university server `uid@serverip`, you must also set up port forwarding locally with:
 
-* `ssh uid@serverip -NL -NL 8888:localhost:8888`
+* `ssh uid@serverip -NL 8888:localhost:8888`
 
 Now you can access the service (JL/ssh) locally at `localhost:8888`. For Jupyterlab, enter this into your browser, and use the token from `runai logs myjobname`. For ssh (Pycharm), create a new remote interpreter for your project with settings: `localhost:8888`, username=password=`root`.
