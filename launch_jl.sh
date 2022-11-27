@@ -14,3 +14,6 @@ then
 else
     echo "No environment directory passed; skipping adding kernels"
 fi
+
+echo "Starting Jupyter Lab session..."
+jupyter-lab --config=.jupyter/nbconfig/tree.json --allow-root
