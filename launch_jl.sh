@@ -2,7 +2,7 @@
 
 if [ -n "$1" ]
 then
-    echo "Adding kernels..."
+    echo "Adding kernels for environments in: $1"
     shopt -s nullglob
     for p in $1/*/bin/python
     do
