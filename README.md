@@ -19,11 +19,11 @@ For the latter two images, replace the `FROM` base image with your own if you wa
 
 ## Building
 
-* `build -t yourdockerhubname/base .` - Builds base image (`Dockerfile`)
-* `build -f Dockerfile-jl -t yourdockerhubname/jl .` - Builds Jupyterlab image
-* `build -f Dockerfile-ssh -t yourdockerhubname/ssh .` - Builds ssh server image
+* `docker build -t yourdockerhubname/base .` - Builds base image (`Dockerfile`)
+* `docker build -f Dockerfile-jl -t yourdockerhubname/jl .` - Builds Jupyterlab image
+* `docker build -f Dockerfile-ssh -t yourdockerhubname/ssh .` - Builds ssh server image
 
-Once you build an image, push it to Docker Hub with `docker push imagename`.
+Once you build an image, push it to Docker Hub with `docker login` and `docker push imagename`.
 
 ## Running job on Runai (base image)
 

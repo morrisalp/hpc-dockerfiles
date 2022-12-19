@@ -3,7 +3,7 @@ FROM nvcr.io/nvidia/pytorch:22.10-py3
 WORKDIR /root
 
 RUN pip install --upgrade pip \
-    && pip install jupyterlab \
+    && pip install -U jupyterlab \
     && apt-get update \
     && apt-get install -y tmux git tree rsync openssh-server python3-distutils python3-apt
 
