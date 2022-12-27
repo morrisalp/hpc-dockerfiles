@@ -14,8 +14,9 @@ You can use these to create environments for jobs on HPC (Runai). Images come wi
 * `Dockerfile` - Base environment. You can run scripts in this using `tmux`. Comes with `Jupyterlab` and `ssh` support (for use with Pycharm).
 * `Dockerfile-jl` - Built on base image; has Jupyterlab entrypoint
 * `Dockerfile-ssh` - Build on base image; has ssh server entrypoint (for use with Pycharm)
+* `Dockerfile-tb` - Build on base image; has TensorBoard entrypoint
 
-For the latter two images, replace the `FROM` base image with your own if you want to build from scratch.
+For the latter images, replace the `FROM` base image with your own if you want to build from scratch.
 
 ## Building
 
@@ -76,3 +77,15 @@ Make sure to leave this running (recommended in `tmux`) so that port forwarding 
 Now you can access the service locally at `localhost:8888`. Create a new remote interpreter for your project with settings: `localhost:8888`, username=password=`root`.
 
 In all of the above, replace `8888` with another local port if needed.
+
+## Overriding entrypoint - TensorBoard example
+
+The following command is an example of overriding the default entrypoint of the base image, in order to launch a TensorBoard instance with port forwarding:
+
+* `runai submit --pvc=storage:/storage -i  morrisalp/base --name your_tb_job  --interactive --service-type=portforward --port 6006:6006 --working-dir /storage/yourname/repo --command -- tensorboard --logdir lightning_logs`
+
+Replace `/storage/yourname/repo` and `lightning_logs` with the relevant directories. If you are on some university server `uid@serverip`, you must also set up port forwarding locally with:
+
+* `ssh uid@serverip -NL 6006:localhost:6006`
+
+You can then access TensorBoard locally at the URL `localhost:6006`.
