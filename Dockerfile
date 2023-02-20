@@ -2,10 +2,14 @@ FROM nvcr.io/nvidia/pytorch:22.10-py3
 
 WORKDIR /root
 
+# the following avoid interactive questions in tzdata install (caused by opencv dependencies)
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Jerusalem
+
 RUN pip install --upgrade pip \
     && pip install -U jupyterlab \
     && apt-get update \
-    && apt-get install -y tmux git tree rsync openssh-server python3-distutils python3-apt
+    && apt-get install -y ffmpeg libsm6 libxext6 htop tmux git tree rsync openssh-server python3-distutils python3-apt
 
 # setup for SSH server:
 RUN mkdir /var/run/sshd \
