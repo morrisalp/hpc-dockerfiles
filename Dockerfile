@@ -17,4 +17,10 @@ RUN mkdir /var/run/sshd \
     && sed 's/#*PermitRootLogin prohibit-password/PermitRootLogin yes/' -i /etc/ssh/sshd_config \
     && sed 's/session\s*required\s*pam_loginuid.so/session optional pam_loginuid.so/' -i /etc/pam.d/sshd
 
+RUN pip install --upgrade --ignore-installed --force-reinstall jupyterlab_widgets \
+    && source /usr/local/nvm/nvm.sh \ 
+    && jupyter lab build
+# the last lines fix a bug with the display of widgets such as tqdm progress bars in jupyter lab
+# nvm setup is needed so jupyter lab build can see node (normally this is run via bashrc when starting bash shell)
+
 ENTRYPOINT sleep infinity
